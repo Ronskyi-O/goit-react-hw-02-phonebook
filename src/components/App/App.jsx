@@ -12,6 +12,10 @@ export class App extends Component {
     filter: '',
   }
 
+  nameIncludesCheking = () => {
+
+  }
+
   addContact = ({ name, number }) => {
     const contact = {
       id: nanoid(),
@@ -19,10 +23,20 @@ export class App extends Component {
       number,
     }
 
-    this.setState(({ contacts }) => ({
-      contacts: [...contacts, contact]
-    }))
+    const nameInArray = this.state.contacts.map(contact => (
+      contact.name
+    ))
+    if (nameInArray.includes(contact.name)) {
+      alert(`${contact.name} is already in contacts `)
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [...contacts, contact]
+      }))
+    }
+
   }
+
+
 
   filterChange = (event) => {
     this.setState({ filter: event.currentTarget.value })
@@ -37,6 +51,7 @@ export class App extends Component {
   }
 
   render() {
+
 
     const { filter } = this.state
 
