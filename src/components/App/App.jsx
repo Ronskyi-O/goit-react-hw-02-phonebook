@@ -3,6 +3,7 @@ import { Container } from './App.styled';
 import { nanoid } from 'nanoid'
 import { ContactAddForm } from '../ContactsAddForm/ContactAddForm'
 import { Filter } from "../Filter/Filter";
+import { ContactList } from 'components/ContactList/ContactList';
 
 
 export class App extends Component {
@@ -42,13 +43,7 @@ export class App extends Component {
           <ContactAddForm onSubmit={this.addContact} />
           <h2>Contacs</h2>
           <Filter value={filter} onChange={this.filterChange} />
-          <ul>
-            {filtredContacts.map(({ id, name, number }) => (
-              <li key={id}>
-                <p>{name}: {number}</p>
-              </li>
-            ))}
-          </ul>
+          <ContactList contacts={filtredContacts} />
         </div>
       </Container>
 
