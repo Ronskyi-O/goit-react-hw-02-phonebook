@@ -6,8 +6,9 @@ import { nanoid } from 'nanoid'
 export class App extends Component {
   state = {
     contacts: [],
+    filter: '',
     name: '',
-    number: ''
+    number: '',
   }
 
   handleChange = (event) => {
@@ -35,15 +36,22 @@ export class App extends Component {
       name: this.state.name,
       number: this.state.number
     }
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact]
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, contact]
     }))
+  }
+
+  filterChange = (event) => {
+    this.setState({ filter: event.currentTarget.value })
   }
 
   render() {
 
-    const { contacts } = this.state
-    const { name, number } = this.state
+    const { name, number, filter, contacts } = this.state
+
+    const filterNormalized = filter.toLowerCase()
+    const filtredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterNormalized))
 
     return (
       <Container>
@@ -74,8 +82,15 @@ export class App extends Component {
           </form>
           <div>
             <h2>Contacs</h2>
+            <label>Find contacts by name
+              <input
+                type="text"
+                value={filter}
+                onChange={this.filterChange}
+              />
+            </label>
             <ul>
-              {contacts.map(({ id, name, number }) => (
+              {filtredContacts.map(({ id, name, number }) => (
                 <li key={id}>
                   <p>{name}: {number}</p>
                 </li>
