@@ -28,13 +28,19 @@ export class App extends Component {
     this.setState({ filter: event.currentTarget.value })
   }
 
+  getFiltredContacts = () => {
+    const { filter, contacts } = this.state
+    const filterNormalized = filter.toLowerCase()
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterNormalized))
+  }
+
   render() {
 
-    const { filter, contacts } = this.state
+    const { filter } = this.state
 
-    const filterNormalized = filter.toLowerCase()
-    const filtredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filterNormalized))
+    const filtredContacts = this.getFiltredContacts()
 
     return (
       <Container>
