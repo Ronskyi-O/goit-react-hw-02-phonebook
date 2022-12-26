@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Container } from './App.styled';
 import { nanoid } from 'nanoid'
 import { ContactAddForm } from '../ContactsAddForm/ContactAddForm'
 import { Filter } from "../Filter/Filter";
 import { ContactList } from 'components/ContactList/ContactList';
+import { Container, PhonebookHeading, ContactsHeading } from './App.styled';
 
 
 export class App extends Component {
@@ -63,9 +63,9 @@ export class App extends Component {
     return (
       <Container>
         <div>
-          <h1>Phonebook</h1>
+          <PhonebookHeading>Phonebook</PhonebookHeading>
           <ContactAddForm onSubmit={this.addContact} />
-          <h2>Contacs</h2>
+          <ContactsHeading>Contacs</ContactsHeading>
           <Filter value={filter} onChange={this.filterChange} />
           <ContactList contacts={filtredContacts} onDeleteContact={this.deleteContact} />
         </div>
