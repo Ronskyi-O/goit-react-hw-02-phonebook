@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 
 export class ContactAddForm extends Component {
@@ -54,4 +55,8 @@ export class ContactAddForm extends Component {
             </form>
         )
     }
+}
+
+ContactAddForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 }
