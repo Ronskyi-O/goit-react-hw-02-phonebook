@@ -12,8 +12,25 @@ export class App extends Component {
     filter: '',
   }
 
-  nameIncludesCheking = () => {
+  // nameIncludesCheking = () => {
+  // }
 
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+
+  }
+
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state
+
+    if (prevState.contact !== contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts))
+    }
   }
 
   addContact = ({ name, number }) => {
